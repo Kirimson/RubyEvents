@@ -1,0 +1,13 @@
+<% if current_user.id == @organiser.id %>
+    <h1>My Account</h1>
+    <p>Welcome to your page, <%= @organiser.uc_name %></p>
+    <p>Here you can see all your events, make a new event and manage your profile. Make yourself at home!</p>
+<% else %>
+    <h1><%= @organiser.name_posses %> Page</h1>
+    <br>
+    <h3>Contact Details</h3>
+    <p><%= @organiser.email %></p>
+<% end %>
+
+<h1><%= current_user.id == @organiser.id ? 'My' : @organiser.name_posses %> Events</h1>
+<%= render partial: 'layouts/components/eventShort', locals: {eventsList: @organiser.events, include_heading: true} %>

@@ -1,0 +1,92 @@
+<div class="event-image-container">
+
+    <% if form %>
+        <%= form.file_field :image, {hidden: :true} %>
+        <%= form.label :image, (image_tag url_for(@event.image_url), {:class => 'event-image'}) %>
+    <% else %>
+        <%= image_tag url_for(@event.image_url), {:class => 'event-image'} %>
+    <% end %>
+
+    <% if form %>
+        <%= form.text_field :name, {:class => 'form-control col-lg-2', :placeholder => 'Event Name'} %>
+    <% else %>
+        <h1><%= @event.name %></h1>
+        <p id="like-count">Likes: <%= @event.likes %></p>
+        <% if !event_owner(@event) %>
+            <% if logged_in? %>
+                <%= form_with scope: :like, url: like_path, remote: true do |form| %>
+                    <%= form.hidden_field :event_id, value: @event.id %>
+                    <input name="commit" value="<%= @liked ? 'Unlike' : 'Like' %>" class="btn btn-outline-secondary"
+                           id="like-button" type="submit">
+                <% end %>
+            <% end %>
+        <% else %>
+            <%= link_to 'Edit', edit_event_path, {:class => 'btn btn-outline-secondary'} %>
+        <% end %>
+    <% end %>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-lg-6">
+        <h1>Description</h1>
+        <% if form %>
+            <%= form.cktext_area :description %>
+        <% else %>
+            <%= sanitize @event.description, tags: %w(strong em a b p img), attributes: %w(href style src) %>
+        <% end %>
+    </div>
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Category</h1>
+                <% if form %>
+                    <%= form.select :category, [ 'Other', 'Sport', 'Culture'], {}, {:class => 'form-control col-lg-5'} %>
+                <% else %>
+                    <%= @event.category %>
+                <% end %>
+            </div>
+            <div class="col-lg-12">
+                <h1>Organiser</h1>
+                <% if form %>
+                    <%= current_user.name %>
+                <% else %>
+                    <a href="mailto:<%= @event.organiser.email %>"><%= @event.organiser.name %></a>
+                <% end %>
+            </div>
+            <div class="col-lg-12">
+                <h1>Venue</h1>
+                <% if form %>
+                    <%= form.text_field :venue, {:class => 'form-control col-lg-5', :placeholder => 'Event Venue'} %>
+                    <br/>
+                <% else %>
+                    <%= @event.venue %>
+                <% end %>
+            </div>
+            <div class="col-lg-12">
+                <h1>Date</h1>
+                <% if form %>
+                    <div class="input-group">
+                        <%= form.date_field :day, {:class => 'form-control col-lg-4'} %><br/>
+                        <span class="input-group-append">
+                             <%= form.time_field :time, {:class => 'form-control',
+                                                         :value => (@event.time ? @event.time.strftime('%H:%M'):'')} %>
+                            <br/>
+                        </span>
+                    </div>
+                <% else %>
+                    <%= @event.readable_date %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+<% if form %>
+    <div>
+        <%= form.collection_check_boxes :related_event, Event.all, :id, :name do |b| %>
+            <%= b.check_box(class: 'related-box',
+                            checked: (  @event.related_to?(b.object.id) && @event.not_new? ? 'checked' : 'false' )) %>
+            <%= b.label(class: 'related-label') %>
+            <br/>
+        <% end %>
+    </div>
+<% end %>

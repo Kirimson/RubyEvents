@@ -1,0 +1,16 @@
+<h1>Login</h1>
+<div class="row justify-content-center">
+<%= form_for(:session, url: login_path) do |form| %>
+    <p>
+        <%= form.label :email, {:class => 'col-form-label'} %><br/>
+        <%= form.email_field :email, {:class => 'form-control'} %><br/>
+        <%= form.label :password, {:class => 'col-form-label'} %><br/>
+        <%= form.password_field :password, {:class => 'form-control'} %><br/>
+        <%= form.submit 'Login', {:class => 'btn btn-outline-secondary'} %>
+    </p>
+<% end %>
+</div>
+<h2>No Account? No Problem!</h2>
+<div class="row justify-content-center">
+    <%= link_to 'register now!', new_organiser_path, {:class => 'btn btn-outline-success'} %>
+</div>

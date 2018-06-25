@@ -1,0 +1,39 @@
+<div class="row" id="sort-headings">
+    <h4 class="col-lg-2">
+        <a href="#">Name
+            <% if order_by == 'name' %>
+                <%= fa_icon 'angle-down' %>
+            <% end %>
+        </a>
+    </h4>
+    <h4 class="col-lg-2">
+        <a href="#">Category</a>
+        <% if order_by == 'category' %>
+            <%= fa_icon 'angle-down' %>
+        <% end %>
+    </h4>
+    <h4 class="col-lg-2">
+        <a href="#">Organiser</a>
+        <% if order_by == 'organiser' %>
+            <%= fa_icon 'angle-down' %>
+        <% end %>
+    </h4>
+    <h4 class="col-lg-2">
+        <a href="#">When</a>
+        <% if order_by == 'date' %>
+            <%= fa_icon 'angle-down' %>
+        <% end %>
+    </h4>
+    <h4 class="col-lg-2">
+        <a href="#">Where</a>
+        <% if order_by == 'venue' %>
+            <%= fa_icon 'angle-down' %>
+        <% end %>
+    </h4>
+    <h4 class="col-lg-2">
+        <a href="#">Likes</a>
+        <% if order_by == 'likes' %>
+            <%= fa_icon 'angle-down' %>
+        <% end %>
+    </h4>
+</div>

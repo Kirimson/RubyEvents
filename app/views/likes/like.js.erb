@@ -1,0 +1,4 @@
+<% unless @event.nil? %>
+    $('#like-count').html("Likes: <%= @event.likes %>");
+    $("#like-button").attr('value', "<%= @liked ? 'Unlike' : 'Like' %>");
+<% end %>

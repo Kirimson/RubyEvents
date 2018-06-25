@@ -1,0 +1,94 @@
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+@import "bootstrap";
+@import "font-awesome";
+@import "variables";
+
+@mixin box-shadow($hoffset, $voffset, $blur, $spread, $color) {
+  -webkit-box-shadow: $hoffset $voffset $blur $spread $color;
+  -moz-box-shadow: $hoffset $voffset $blur $spread $color;
+  box-shadow: $hoffset $voffset $blur $spread $color;
+}
+
+html, body{
+  height: 100%;
+  background-color: #e7e7e7;
+}
+
+body{
+  font: 100% $font-family-sans-serif;
+  color: $primary-color;
+}
+
+nav{
+  max-height: 5%;
+  //@include box-shadow(0, 1px, 0px, 0, rgba(0, 0, 0, 0.45));
+}
+
+h1,h2,h3{
+  font-weight: lighter;
+}
+
+h1 {
+  text-decoration-line: underline;
+}
+
+h2 {
+  @extend %centered-underline;
+}
+
+img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  color: inherit;
+}
+
+label{
+  img{
+    cursor: pointer;
+  }
+}
+
+.container{
+  background-color: #f7f7f7;
+  min-height: 95%;
+}
+
+.event-preview{
+  @extend %event-image;
+  $size: 10em;
+  width: $size;
+  height: $size;
+}
+
+.event-image-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.event-image{
+  @extend %event-image;
+  $size: 15em;
+  width: $size;
+  height: $size;
+}
+
+#nav-image{
+  width: 2em;
+  height: 2em;
+}
+
+#event-edit-buttons{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1em;
+}

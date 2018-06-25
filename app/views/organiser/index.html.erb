@@ -1,0 +1,27 @@
+<h1>Organisers</h1>
+<p>Here's a list of organisers, why? Because the resource macro in my routes file made one,
+    so I'm damn well gonna use it</p>
+<div class="row">
+    <div class="col-lg-4">
+        <span><u>Name</u></span>
+    </div>
+    <div class="col-lg-4">
+        <span><u>Events</u></span>
+    </div>
+    <div class="col-lg-4">
+        <span><u>Email</u></span>
+    </div>
+</div>
+<div class="row">
+    <% @organisers.each do |organiser| %>
+        <div class="col-lg-4">
+            <%= link_to organiser.name, organiser%>
+        </div>
+        <div class="col-lg-4">
+            <%= organiser.events.count %>
+        </div>
+        <div class="col-lg-4">
+            <%= organiser.email %>
+        </div>
+    <% end %>
+</div>

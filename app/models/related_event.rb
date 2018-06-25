@@ -1,0 +1,3 @@
+class RelatedEvent < ApplicationRecord
+
+end

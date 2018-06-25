@@ -1,0 +1,9 @@
+<h1>Welcome to RubyEvents</h1>
+<p>
+    The better iteration of <a href="http://www.gateskt.eas-vmin2410-01.aston.ac.uk/">AstonEvents</a>, mainly as it's
+    using ruby on rails instead of PHP/Laravel
+</p>
+<h1>Most Liked Events</h1>
+<%= render partial: 'layouts/components/eventShort', locals: {eventsList: @events.order(likes: :desc).limit(3), include_heading: false} %>
+<h1>Most Recent Events</h1>
+<%= render partial: 'layouts/components/eventShort', locals: {eventsList: @events.order(created_at: :desc).limit(3), include_heading: false} %>

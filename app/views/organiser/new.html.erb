@@ -1,0 +1,33 @@
+<h1>Register for RubyEvents</h1>
+<%= form_with scope: :organiser, url: organiser_index_path, local: true do |form| %>
+    <% if flash[:error] %>
+        <div class="alert alert-danger" role="alert">
+            <h4 class="alert-heading">Failed to create account</h4>
+            <p><%= pluralize(flash[:error].count, 'error') %> occurred while creating your account</p>
+            <ul>
+                <% flash[:error].each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+            <hr>
+            <p class="mb-0">Please try again</p>
+        </div>
+    <% end %>
+    <p>
+        <%= form.label :name, {:class => 'col-form-label'} %><br/>
+        <%= form.text_field :name, {:class => 'form-control col-lg-3'}%><br/>
+    </p>
+    <p>
+        <%= form.label :email, {:class => 'col-form-label'}  %><br/>
+        <%= form.email_field :email, {:class => 'form-control col-lg-3'} %><br/>
+        <%= form.email_field :email_confirmation, {:class => 'form-control col-lg-3'} %><br/>
+    </p>
+    <p>
+        <%= form.label :password, {:class => 'col-form-label'}  %><br/>
+        <%= form.password_field :password, {:class => 'form-control col-lg-3'} %><br/>
+        <%= form.password_field :password_confirmation, {:class => 'form-control col-lg-3'} %><br/>
+    </p>
+    <p>
+        <%= form.submit 'Create Account', {:class => 'btn btn-outline-secondary' } %>
+    </p>
+<% end %>

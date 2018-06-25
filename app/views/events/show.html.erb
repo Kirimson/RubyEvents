@@ -1,0 +1,5 @@
+<%= render partial: 'layouts/components/eventPartial', locals: {form: false} %>
+<% if @event.related_events? %>
+<h1>Related Events:</h1>
+    <%= render partial: 'layouts/components/eventShort', locals: {eventsList: @event.related_events, include_heading: false} %>
+<% end %>

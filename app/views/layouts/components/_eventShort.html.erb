@@ -1,0 +1,44 @@
+<% if eventsList.empty? %>
+    <h2>No events could be found!</h2>
+<% else %>
+    <% if include_heading %>
+        <%= render partial: 'layouts/components/eventheading', locals: {order_by: 'name'} %>
+    <% end %>
+    <% eventsList.each do |event| %>
+        <hr/>
+        <div class="row">
+            <div class="col-lg-4 event-image-container">
+                <a href="<%= event_path(event.id) %>">
+                    <%= image_tag url_for(event.image_url), {:class => 'event-preview'} %>
+                </a>
+                <a href="<%= event_path(event.id) %>">
+                    <h3><%= event.name %></h3>
+                </a>
+                <p>Category: <%= event.category %></p>
+            </div>
+            <div class="col-lg-8">
+                <div>
+                    <h4>Description</h4>
+                    <div id="event-description">
+                        <%= sanitize event.short_description %>
+                    </div>
+                </div>
+                <hr/>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div><h5>Organiser</h5><span>
+                            <%= event_owner(event) ? 'Me' : event.organiser.name %>
+                        </span></div>
+                        <hr/>
+                        <div><h5>When</h5><span><%= event.readable_date %></span></div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div><h5>Where</h5><span><%= event.venue %></span></div>
+                        <hr/>
+                        <div><h5>Likes</h5><span><%= event.likes %></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+<% end %>
